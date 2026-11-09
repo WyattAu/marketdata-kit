@@ -1,0 +1,41 @@
+[package]
+name = "marketdata-kit"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "Apache-2.0"
+authors = ["Wyatt Au <wyatt_au@protonmail.com>"]
+repository = "https://github.com/WyattAu/marketdata-kit"
+description = "Market-data adapters for the argus intelligence platform"
+
+[lib]
+name = "mdkit"
+
+[dependencies]
+feedkit = "0.1.0"
+plycore = "0.2"
+fetch-kit = { version = "0.2.1", features = ["circuit-breaker"] }
+breaker = "2.0.2"
+reqwest = { version = "0.13", default-features = false, features = ["json", "rustls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tracing = "0.1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "signal", "time", "sync"] }
+tokio-tungstenite = { version = "0.29", features = ["rustls-tls-webpki-roots"] }
+futures-util = "0.3"
+
+[lints.rust]
+unsafe_code = "deny"
+missing_docs = "warn"
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(loom)'] }
+
+[lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "deny", priority = -1 }
+unwrap_used = "deny"
+expect_used = "deny"
+indexing_slicing = "deny"
+panic = "deny"
+module_name_repetitions = "allow"
+multiple_crate_versions = "allow"
