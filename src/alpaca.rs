@@ -87,8 +87,8 @@ impl Source for AlpacaQuotes {
             .json::<Value>()
             .await
             .map_err(|e| FeedError::Malformed(format!("json decode failed: {e}")))?;
-        let quotes = Self::quotes_from_payload(&value)
-            .map_err(|e| FeedError::Malformed(e.to_string()))?;
+        let quotes =
+            Self::quotes_from_payload(&value).map_err(|e| FeedError::Malformed(e.to_string()))?;
         Ok(SourceBatch::Quotes(quotes))
     }
 }

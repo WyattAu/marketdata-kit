@@ -26,7 +26,8 @@ pub async fn klines(
     interval: &str,
     limit: u32,
 ) -> Result<Vec<Candle>, MdkitError> {
-    let url = format!("{REST_BASE}/api/v3/klines?symbol={symbol}&interval={interval}&limit={limit}");
+    let url =
+        format!("{REST_BASE}/api/v3/klines?symbol={symbol}&interval={interval}&limit={limit}");
     let value = client
         .get(url)
         .json_response::<Value>()
@@ -49,7 +50,8 @@ pub async fn klines(
             }
         };
         let candle = Candle {
-            time: num(0).ok_or_else(|| MdkitError::Malformed("missing openTime".to_string()))? / 1000.0,
+            time: num(0).ok_or_else(|| MdkitError::Malformed("missing openTime".to_string()))?
+                / 1000.0,
             open: num(1).ok_or_else(|| MdkitError::Malformed("missing open".to_string()))?,
             high: num(2).ok_or_else(|| MdkitError::Malformed("missing high".to_string()))?,
             low: num(3).ok_or_else(|| MdkitError::Malformed("missing low".to_string()))?,
